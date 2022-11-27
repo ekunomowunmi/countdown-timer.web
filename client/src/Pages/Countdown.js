@@ -1,8 +1,12 @@
-import React,{useCallback, useEffect, useState} from 'react'
+import React,{useCallback, useEffect, useState} from 'react';
+import { useParams } from "react-router-dom";
+
 import { useGenContext } from './CreateCountdown';
 
 const Countdown = () => {
-    let url = `https://countdown-api.onrender.com/`
+   const {title} = useParams() ;
+    let url = `https://countdown-api.onrender.com/${title}`;
+
     const [loading, setLoading] = useState(false)
     let [state, setState] = useState({
         title:"",
@@ -19,8 +23,6 @@ const Countdown = () => {
 
             setState(data)
             setLoading(false)
-            console.log(data)
-            console.log(state)
         }
         catch(error) {
             console.log(`${error.name}: ${error.message}`)
